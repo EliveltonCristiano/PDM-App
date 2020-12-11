@@ -9,7 +9,7 @@
 
 <template>
     <view class="container">
-         <text class="tittulo">Cadastrar usuario</text>
+         <text class="titulo">Cadastrar usuario</text>
 
          <text-input class="input" v-model="Nome" />
          <text-input class="input" v-model="Email" />
@@ -27,16 +27,24 @@
 
 <script>
 export default {
-    
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+  methods: {
+    onPressCadastrar: function() {
+      this.navigation.navigate("MeusDados");
+        }  
+    }
 }
 </script>
 
 <style>
 .container {
-    flex: 1;
-    background-color:lightblue;
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 .titulo {
   justify-content: flex-start;

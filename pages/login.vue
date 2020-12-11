@@ -8,7 +8,7 @@
 
 <template>
   <view class="container">
-   
+    
     <text class="titulo">Login</text>
     <text-input class="input" v-model="nome" />
     <text-input class="input" v-model="senha" />
@@ -24,13 +24,6 @@
       v-bind:title="message" 
       v-bind:on-press="onPressLogin"
     />
-
-    <!-- <button
-      class="button"
-      :on-press="onPressRecuperarSenha"
-      title="Esqueceu a senha?"
-      color="#841584"
-    /> -->
    
   </view>
 </template>
@@ -43,11 +36,16 @@ export default {
       nome: "Usuario ou Email",
       senha: "Senha"
     };
-    
+  },
+    props: {
+    navigation: {
+      type: Object
+    }
   },
   methods: {
     onPressLogin: function() {
-      alert('Acesso negado.');
+      //alert('Acesso negado.');
+      this.navigation.navigate("Cadastro");
     },
     onPressRecuperarSenha: function() {
       alert('Informe o email cadastrado.')
@@ -58,10 +56,9 @@ export default {
 
 <style>
 .container {
-  flex: 1;
-  background-color:lightblue;
   align-items: center;
   justify-content: center;
+  flex: 1;
 }
 .titulo {
   justify-content: flex-start;
