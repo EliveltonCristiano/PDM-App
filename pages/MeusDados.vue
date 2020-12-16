@@ -1,23 +1,13 @@
-/* A tela de MEUS DADOS deverá conter:
-
-- Nome
-- Email
-- Senha
-- Celular
-- Sexo
-- Idade
-- Botão de atualizar */
-
 <template>
     <view class="container">
-         <text class="titulo">Meus Dados</text>
 
-         <text-input class="input" v-model="Nome" />
-         <text-input class="input" v-model="Email" />
-         <text-input class="input" v-model="Senha" />
-         <text-input class="input" v-model="Celular" />
-         <text-input class="input" v-model="Sexo" />
-         <text-input class="input" v-model="Idade" />
+         <text class="titulo">Meus Dados</text>
+         <text-input class="input" v-model="usuario.nome" />
+         <text-input class="input" v-model="usuario.email" />
+         <text-input class="input" v-model="usuario.senha" />
+         <text-input class="input" v-model="usuario.celular" />
+         <text-input class="input" v-model="usuario.sexo" />
+         <text-input class="input" v-model="usuario.idade" />
          
         <button
             class="button"
@@ -29,8 +19,31 @@
 </template>
 
 <script>
+import DadosUsuarioService from '../services/DadosUsuario.Service';
 export default {
-    
+  data()  {
+    return {
+      usuario: {
+        nome: null,
+        email: null,
+        senha: null,
+        celular: null,
+        sexo: null,
+        idade: null,
+      }
+    };
+  },
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+   methods: {
+      async onPressMeusDados() {
+      console.log("______________________");
+      this.response = await DadosUsuarioService.get(this.data.nome);
+    }
+  }
 }
 </script>
 
@@ -46,10 +59,10 @@ export default {
   text-align: center;
 }
 .input {
-    background-color: white;
-    height: 40; 
-    width: 300;
-    margin-top: 5px; 
-    borderWidth: 0.9;
+  width:80%;
+  padding:10px;
+  border-radius:50px;
+  margin-bottom: 30px;
+  border-width: 1;
 }
 </style>
