@@ -12,15 +12,19 @@ import {
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import MeusDados from "./pages/MeusDados";
+import RecuperarSenha from "./pages/RecuperarSenha"
+import Painel from "./pages/Painel"
 
 const StackNavigator = createStackNavigator(
   {
     Login: Login,
     Cadastro: Cadastro,
     MeusDados: MeusDados,
+    RecuperarSenha: RecuperarSenha,
+    Painel: Painel,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Cadastro',
   }
 );
 
