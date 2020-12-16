@@ -1,17 +1,9 @@
-
-/*  A tela de LOGIN deverá conter:
-
-- Email
-- Senha
-- Um link para "Esqueci Minha Senha"
-- Botão de Login */
-
 <template>
   <view class="container">
-    
+        
     <text class="titulo">Login</text>
-    <text-input class="input" v-model="nome" />
-    <text-input class="input" v-model="senha" />
+    <text-input class="input" v-model="usuario.email" />
+    <text-input class="input" v-model="usuario.senha" />
 
     <touchable-opacity :on-press="onPressRecuperarSenha">
       <text> 
@@ -21,20 +13,30 @@
 
     <button 
       class="button" 
-      v-bind:title="message" 
-      v-bind:on-press="onPressLogin"
+      title="Login" 
+      :on-press="onPressLogin"
+    />
+
+    <button 
+      class="button" 
+      title="Cadastro" 
+      :on-press="onPressCadastro"
     />
    
   </view>
 </template>
 
 <script>
+
+import LoginService from "../services/Login.Service"
+
 export default { 
-  data: function()  {
+  data()  {
     return{
-      message: "Login",
-      nome: "Usuario ou Email",
-      senha: "Senha"
+      usuario: {
+        email: "userdemo@demo.com.br",
+        senha: "minhasenha"
+      }
     };
   },
     props: {
@@ -43,12 +45,18 @@ export default {
     }
   },
   methods: {
-    onPressLogin: function() {
-      //alert('Acesso negado.');
-      this.navigation.navigate("Cadastro");
+    async onPressLogin() {
+      this.response = await LoginService.postLogin(this.usuario);
+      // if(response.status){
+      this.navigation.navigate("Painel");
+      // }
+      //this.navigation.navigate("Cadastro");
     },
-    onPressRecuperarSenha: function() {
-      alert('Informe o email cadastrado.')
+    onPressRecuperarSenha() {
+      this.navigation.navigate("RecuperarSenha");
+    },
+    onPressCadastro() {
+      this.navigation.navigate("Cadastro");
     } 
   },
 };
@@ -66,11 +74,11 @@ export default {
   text-align: center;
 }
 .input {
-  background-color: white;
-  height: 40; 
-  width: 300;
-  margin-top: 5px; 
-  borderWidth: 0.9;
+  width:80%;
+  padding:10px;
+  border-radius:50px;
+  margin-bottom: 30px;
+  border-width: 1;
 }
 
 </style>

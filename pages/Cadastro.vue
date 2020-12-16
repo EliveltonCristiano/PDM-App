@@ -1,42 +1,56 @@
-/* A tela de CADASTRO deverá conter ao menos:
-
-- Nome
-- Email
-- Senha
-- Celular
-- Botão de cadastro */
-
-
 <template>
-    <view class="container">
+    <view @submit.prevent="salvar" class="container">
+         
          <text class="titulo">Cadastrar usuario</text>
-
-         <text-input class="input" v-model="Nome" />
-         <text-input class="input" v-model="Email" />
-         <text-input class="input" v-model="Senha" />
-         <text-input class="input" v-model="Celular" />
+         <text-input class="input" v-model="usuario.nome" />
+         <text-input class="input" v-model="usuario.email" />
+         <text-input class="input" v-model="usuario.senha" />
+         <text-input class="input" v-model="usuario.celular" />
          
         <button
-            class="button"
+            class="btnCadastrar"
             :on-press="onPressCadastrar"
             title="Cadastrar"
+        />
+        <button
+            class="btnLogin"
+            :on-press="onPressLogin"
+            title="Login"
         />
 
     </view>
 </template>
 
 <script>
+
+import CadastroService from "../services/Cadastro.Service"
+
 export default {
+  data() {
+    return{
+      usuario: {
+        nome: "Rony",
+        email: "userdemo@demo.com.br",
+        senha: "minhasenha",
+        celular: "8298807555"
+      }
+    };
+  },
   props: {
     navigation: {
       type: Object
     }
   },
   methods: {
-    onPressCadastrar: function() {
-      this.navigation.navigate("MeusDados");
-        }  
-    }
+    async onPressCadastrar() {
+      //this.navigation.navigate("MeusDados");
+      this.response = await CadastroService.postUsuario(this.usuario);
+      //alert(this.usuario.nome)
+    },
+    onPressLogin() {
+      this.navigation.navigate("Login");
+    }  
+  }
 }
 </script>
 
@@ -52,10 +66,11 @@ export default {
   text-align: center;
 }
 .input {
-    background-color: white;
-    height: 40; 
-    width: 300;
-    margin-top: 5px; 
-    borderWidth: 0.9;
+  width:80%;
+  padding:10px;
+  border-radius:50px;
+  margin-bottom: 30px;
+  border-width: 1;
 }
+
 </style>
