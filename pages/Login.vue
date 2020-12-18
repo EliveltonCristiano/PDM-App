@@ -47,10 +47,7 @@ export default {
   methods: {
     async onPressLogin() {
       this.response = await LoginService.postLogin(this.usuario);
-      // if(response.status){
       this.navigation.navigate("Painel");
-      // }
-      //this.navigation.navigate("Cadastro");
     },
     onPressRecuperarSenha() {
       this.navigation.navigate("RecuperarSenha");
