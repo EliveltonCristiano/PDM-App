@@ -13,28 +13,14 @@
 </template>
 
 <script>
-import DadosUsuarioService from '../services/DadosUsuario.Service';
 export default {
-    props: {
-            navigation: {
-            type: Object
-        }
+  props: {
+      navigation: { 
+      type: Object 
     },
-      data() {
-        return {
-            usuario: {
-                nome: null,
-                email: null,
-                senha: null,
-                celular: null,
-                sexo: null,
-                idade: null,
-            }
-        }
-    },
+  },
     methods: {
         onPressMeusDados() {
-        console.log("______________________");
         this.navigation.navigate("MeusDados");
     }
   }
