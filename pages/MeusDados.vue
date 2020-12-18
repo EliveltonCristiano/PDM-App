@@ -20,30 +20,34 @@
 
 <script>
 import DadosUsuarioService from '../services/DadosUsuario.Service';
+
 export default {
-  data()  {
+    async mounted() {
+    const { usuario } = await DadosUsuarioService.getDados();
+    this.usuario = usuario;
+},
+  data() {
     return {
-      usuario: {
-        nome: null,
-        email: null,
-        senha: null,
-        celular: null,
-        sexo: null,
-        idade: null,
-      }
-    };
+    usuario: {
+      nome: null,
+      email: null,
+      celular: null,
+      senha: null,
+      idade: null,
+      sexo: null,
+    },
+    }
   },
   props: {
-    navigation: {
-      type: Object
-    }
+      navigation: { 
+        type: Object 
+    },
   },
    methods: {
-      async onPressMeusDados() {
-      console.log("______________________");
-      this.response = await DadosUsuarioService.get(this.data.nome);
-    }
-  }
+      onPressAtualizar() {
+        //
+    },
+  },
 }
 </script>
 
